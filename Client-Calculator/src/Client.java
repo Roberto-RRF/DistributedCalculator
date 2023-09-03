@@ -14,10 +14,7 @@ public class Client {
             in = new DataInputStream(System.in);
             out = new DataOutputStream(socket.getOutputStream());
 
-            // Read and send the username to the server
-            System.out.print("Enter your username: ");
-            String username = in.readLine();
-            out.writeUTF(username);
+
 
             // Create a thread to listen for server messages
             Thread messageListener = new Thread(new MessageListener());

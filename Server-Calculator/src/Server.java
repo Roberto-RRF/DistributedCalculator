@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.util.Objects;
 
 public class Server {
     private Socket socket;
@@ -14,10 +15,6 @@ public class Server {
             in = new DataInputStream(System.in);
             out = new DataOutputStream(socket.getOutputStream());
 
-            // Read and send the username to the server
-            System.out.print("Enter your username: ");
-            String username = in.readLine();
-            out.writeUTF(username);
 
             // Create a thread to listen for server messages
             Thread messageListener = new Thread(new MessageListener());
@@ -48,8 +45,48 @@ public class Server {
                 DataInputStream serverIn = new DataInputStream(socket.getInputStream());
 
                 while (true) {
-                    String message = serverIn.readUTF();
-                    System.out.println(message);
+                    String incomingMessage = serverIn.readUTF();
+                    String[] messageParts = incomingMessage.split(",");
+                    int result = 0;
+                    if(Objects.equals(messageParts[0], "100"))
+                    {
+                        System.out.println("Operation code accepted. CODE: "+messageParts[0]);
+                        switch (messageParts[3])
+                        {
+                            case "+":
+                                System.out.println("Addition");
+                                result = Integer.parseInt(messageParts[1]) + Integer.parseInt(messageParts[2]);
+
+                                break;
+                            case "-":
+                                System.out.println("Subtraction");
+                                result = Integer.parseInt(messageParts[1]) - Integer.parseInt(messageParts[2]);
+                                break;
+                            case "*":
+                                System.out.println("Multiplication");
+                                result = Integer.parseInt(messageParts[1]) * Integer.parseInt(messageParts[2]);
+                                break;
+                            case "/":
+                                System.out.println("Division");
+                                result = Integer.parseInt(messageParts[1]) / Integer.parseInt(messageParts[2]);
+                                break;
+                            default:
+                                System.out.println("Operator not recognized: "+messageParts[3]);
+                                break;
+                        }
+
+                        // make result string
+                        String resultString = "200,"+messageParts[1]+","+messageParts[2]+","+messageParts[3]+","+result;
+
+                        //Send result to MOM
+                        out.writeUTF(resultString);
+
+
+                    }
+                    else
+                    {
+                        System.out.println("Operation code NOT accepted. CODE: "+messageParts[0]);
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();

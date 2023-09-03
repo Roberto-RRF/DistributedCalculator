@@ -12,7 +12,7 @@ public class MOM {
 
         try {
             server = new ServerSocket(port);
-            System.out.println("MOM SERVER RUNNING ON PORT" + port);
+            System.out.println("MOM SERVER RUNNING ON PORT " + port);
             while (true) {
 
 
