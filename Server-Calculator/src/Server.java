@@ -23,7 +23,7 @@ public class Server {
             // Start sending messages to the server
             String message;
             while (true) {
-                message = in.readLine();
+                message = in.readUTF();
                 out.writeUTF(message);
                 out.flush();
             }
