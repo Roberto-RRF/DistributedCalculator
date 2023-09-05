@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.newclientcalculator.CalculatorController">
+    <children>
+        <TextField fx:id="calculatorDisplay" editable="false" layoutX="25.0" layoutY="15.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="75.0" prefWidth="250.0" text="0">
+            <font>
+                <Font size="40.0" />
+            </font>
+        </TextField>
+        <FlowPane layoutX="25.0" layoutY="125.0" prefHeight="180.0" prefWidth="180.0">
+            <children>
+                <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="1" onAction="#numberButtonClickHandler">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Button>
+                <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="2" onAction="#numberButtonClickHandler">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Button>
+                <Button layoutX="70.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="3" onAction="#numberButtonClickHandler">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Button>
+                <Button layoutX="130.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="4" onAction="#numberButtonClickHandler">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Button>
+                <Button layoutX="10.0" layoutY="70.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="5" onAction="#numberButtonClickHandler">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Button>
+                <Button layoutX="70.0" layoutY="70.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="6" onAction="#numberButtonClickHandler">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Button>
+                <Button layoutX="130.0" layoutY="70.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="7" onAction="#numberButtonClickHandler">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Button>
+                <Button layoutX="10.0" layoutY="130.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="8" onAction="#numberButtonClickHandler">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Button>
+                <Button layoutX="70.0" layoutY="130.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="9" onAction="#numberButtonClickHandler">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Button>
+                <Button layoutX="70.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="0" onAction="#numberButtonClickHandler">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="=" onAction="#equalButtonClickHandler">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="C" onAction="#clearButtonClickHandler">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Button>
+            </children>
+        </FlowPane>
+        <VBox layoutX="215.0" layoutY="125.0" prefHeight="240.0" prefWidth="60.0">
+            <children>
+                <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="+" onAction="#operatorButtonClickHandler">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Button>
+                <Button layoutX="10.0" layoutY="70.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="-" onAction="#operatorButtonClickHandler">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Button>
+                <Button layoutX="10.0" layoutY="130.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="/" onAction="#operatorButtonClickHandler">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Button>
+                <Button layoutX="10.0" layoutY="172.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="*" onAction="#operatorButtonClickHandler">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+        <Text fx:id="savedNumbers" layoutX="30.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0"/>
+        <ScrollPane layoutX="313.0" layoutY="65.0" prefHeight="300.0" prefWidth="200.0">
+            <content>
+                <VBox fx:id="vbox" prefHeight="972.0" prefWidth="179.0" />
+            </content>
+        </ScrollPane>
+        <Label layoutX="313.0" layoutY="33.0" prefHeight="17.0" prefWidth="94.0" text="Resultados:" />
+    </children>
+</AnchorPane>

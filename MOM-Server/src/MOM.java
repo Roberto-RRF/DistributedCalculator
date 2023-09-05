@@ -92,6 +92,7 @@ public class MOM {
         private void broadcastMessage(String message) {
             for (ClientHandler client : clients) {
                 try {
+                   System.out.println("PACKAGE: "+message);
                     client.out.writeUTF(message);
                     client.out.flush();
                 } catch (IOException e) {
