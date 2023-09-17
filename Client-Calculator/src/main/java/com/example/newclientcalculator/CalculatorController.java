@@ -91,8 +91,8 @@ public class CalculatorController {
     }
 
 
-    public void initialize(){
-        System.out.println("Initializing...");
+    public void initialize()
+    {
 
         // Start a new thread for socket communication.
         Thread socketThread = new Thread(() -> {
