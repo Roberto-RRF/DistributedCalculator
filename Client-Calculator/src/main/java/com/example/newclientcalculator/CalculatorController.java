@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 import java.io.*;
 import java.net.*;
+import java.net.Socket;
 import java.util.Objects;
 
 public class CalculatorController {
@@ -30,7 +31,8 @@ public class CalculatorController {
 
 
     private Socket socket;
-    private DataInputStream in;
+    private DataInputStream  in;
+
     private DataOutputStream out;
 
 
@@ -98,17 +100,19 @@ public class CalculatorController {
         Thread socketThread = new Thread(() -> {
             try {
 
-                socket = new Socket("localhost", 6666);
-                in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-                out = new DataOutputStream(socket.getOutputStream());
+                socket = new Socket("localhost", 5000);
+                in = new DataInputStream(socket.getInputStream());
+                out = new DataOutputStream(new DataOutputStream(socket.getOutputStream()));
 
-
+                out.writeUTF("cell");
+                out.flush();
 
 
 
                 while (true) {
 
                     serverResponse = in.readUTF();
+                    System.out.println(serverResponse);
                     String messageParts[] = serverResponse.split(",");
                     if(Objects.equals(messageParts[0], "200"))
                     {
