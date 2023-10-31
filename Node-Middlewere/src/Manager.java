@@ -19,7 +19,6 @@ import java.util.Objects;
 
 public class Manager implements Runnable
 {
-
     public static ArrayList<Manager> managerList = new ArrayList<>();
 
     private Socket socket;
@@ -69,13 +68,25 @@ public class Manager implements Runnable
                 {
                     broadcastPackage(mensaje);
                 }
-            } catch (IOException e)
+            } catch (IOException error)
             {
+                // Manage Client Disconnection
                 System.out.println("Error receiving package from component");
-                e.printStackTrace();
-                break;
+                System.out.println("Disconecting component");
+                try
+                {
+                    in.close();
+                    out.close();
+                    socket.close();
+                    managerList.remove(this);
+                    break;
+                } catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
             }
         }
+
     }
 
     public void broadcastPackage(Mensaje data)
