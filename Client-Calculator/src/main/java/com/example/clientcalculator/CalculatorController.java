@@ -1,4 +1,4 @@
-package com.example.newclientcalculator;
+package com.example.clientcalculator;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;

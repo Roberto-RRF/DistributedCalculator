@@ -7,13 +7,13 @@ import java.net.URLClassLoader;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Main {
-    public static void main(String[] args) {
+public class Main
+{
+    public static void main(String[] args)
+    {
         Node node;
         int maxPort = 5010;
         int port = 5000;
-
-
 
         // Buscamos un ouerto del rango que este disponible
         while(port <= maxPort)
@@ -39,10 +39,5 @@ public class Main {
                 }
             }
         }
-
     }
-
-
-
-
 }

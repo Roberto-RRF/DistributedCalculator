@@ -1,8 +1,8 @@
-module com.example.newclientcalculator {
+module com.example.clientcalculator {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens com.example.newclientcalculator to javafx.fxml;
-    exports com.example.newclientcalculator;
+    opens com.example.clientcalculator to javafx.fxml;
+    exports com.example.clientcalculator;
 }

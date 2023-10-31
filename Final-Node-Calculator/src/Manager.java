@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 
-public class Manager implements Runnable{
+public class Manager implements Runnable
+{
 
     public static ArrayList<Manager> managerList = new ArrayList<>();
-
-    private static int amountManagers = 0;
 
     private Socket socket;
 
@@ -23,43 +22,48 @@ public class Manager implements Runnable{
 
     public Manager(Socket socket, boolean knownNode)
     {
-        try{
+        try
+        {
             this.socket = socket;
             this.in = new DataInputStream(socket.getInputStream());
             this.out = new DataOutputStream(new DataOutputStream(socket.getOutputStream()));
-            if (knownNode) {
+            if (knownNode)
+            {
                 out.writeUTF("node");
                 this.type = "node";
-                System.out.println("Node connected");
-            } else {
-                String temp = in.readUTF();
-                System.out.println("Cell connected");
-                this.type = temp;
+            } else
+            {
+                this.type = in.readUTF();
             }
-            amountManagers++;
-            this.element = String.valueOf(amountManagers);
             managerList.add(this);
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void run() {
+    public void run()
+    {
         String incomingMessage;
-        while (socket.isConnected()) {
-            try {
+        while (socket.isConnected())
+        {
+            try
+            {
                 incomingMessage = in.readUTF();
+                System.out.println("Incoming message: " + incomingMessage);
 
-                if (Objects.equals(type, "node")) {
+                if (Objects.equals(type, "node"))
+                {
                     System.out.println("Broadcast to cells");
                     broadcastPackageToCells(incomingMessage);
-                } else{
+                } else
+                {
                     System.out.println("General Broadcast");
                     broadcastPackage(incomingMessage);
                 }
-
-            } catch (IOException e) {
+            } catch (IOException e)
+            {
                 System.out.println("Error receiving package from component");
                 e.printStackTrace();
                 break;
@@ -67,29 +71,37 @@ public class Manager implements Runnable{
         }
     }
 
-    public void broadcastPackage(String data) {
+    public void broadcastPackage(String data)
+    {
         System.out.println("Broadcasting package: " + data);
-        for (Manager componentAdmin : managerList) {
-            try {
-                if (!componentAdmin.element.equals(element)) {
-                    componentAdmin.out.writeUTF(data);
-                    componentAdmin.out.flush();
+        for (Manager componentAdmin : managerList)
+        {
+            try
+            {
+                if (!Objects.equals(componentAdmin.element, element))
+                {
+                    out.writeUTF(data);
                 }
-            } catch (IOException e) {
+            } catch (IOException e)
+            {
                 e.printStackTrace();
             }
         }
     }
 
-    public void broadcastPackageToCells(String data) {
+    public void broadcastPackageToCells(String data)
+    {
         System.out.println("Broadcasting package: " + data);
-        for (Manager componentAdmin : managerList) {
-            try {
-                if (!componentAdmin.element.equals(element) && Objects.equals(componentAdmin.type, "cell")) {
-                    componentAdmin.out.writeUTF(data);
-                    componentAdmin.out.flush();
+        for (Manager componentAdmin : managerList)
+        {
+            try
+            {
+                if (!componentAdmin.element.equals(element) && Objects.equals(componentAdmin.type, "cell"))
+                {
+                    out.writeUTF(data);
                 }
-            } catch (IOException e) {
+            } catch (IOException e)
+            {
                 e.printStackTrace();
             }
         }

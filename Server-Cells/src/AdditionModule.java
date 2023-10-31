@@ -70,7 +70,7 @@ public class AdditionModule {
                 try {
                     incomingMessage = in.readUTF();
 
-                    String messageParts[] = incomingMessage.split(",");
+                    String[] messageParts = incomingMessage.split(",");
                     if (Objects.equals(messageParts[0], "100") && Objects.equals(messageParts[3],"+"))
                     {
                         System.out.println("Addition module received package");
@@ -88,8 +88,5 @@ public class AdditionModule {
             }
         }
     }
-    public static void main(String[] args)
-    {
-        AdditionModule additionModule = new AdditionModule("localhost");
-    }
+
 }

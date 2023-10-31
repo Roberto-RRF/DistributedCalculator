@@ -2,35 +2,34 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Node{
+public class Node
+{
 
     public ServerSocket nodeSocket;
     public int maxPort = 5010;
-
     public Node(ServerSocket socket)
     {
         this.nodeSocket = socket;
     }
 
-
-
-
-
     public void startNode()
     {
         new Thread(() -> {
-            try {
-                while (!nodeSocket.isClosed()) {
+            try
+            {
+                while (!nodeSocket.isClosed())
+                {
                     Socket socket = nodeSocket.accept();
+                    System.out.println("New element connected");
                     Manager nodeManager = new Manager(socket, false);
                     Thread thread = new Thread(nodeManager);
                     thread.start();
                 }
-            } catch (IOException e) {
+            } catch (IOException e)
+            {
                 e.printStackTrace();
             }
         }).start();
-
     }
 
     public void searchNodes()
@@ -48,9 +47,11 @@ public class Node{
                     port++;
                 } catch (IOException e)
                 {
-                    if(port <= maxPort) {
+                    if(port <= maxPort)
+                    {
                         port++;
-                    } else {
+                    } else
+                    {
                         e.printStackTrace();
                         System.out.println("No ports available");
                         break;
@@ -59,11 +60,4 @@ public class Node{
             }
         }).start();
     }
-
-
-
-
-
-
-
 }
