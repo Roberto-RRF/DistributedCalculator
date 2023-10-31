@@ -3,8 +3,19 @@ import java.net.Socket;
 import java.util.Objects;
 import java.util.Random;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+/*******************************************************************************
+ *                             class SubtractionModule
+ *******************************************************************************
+ * File       : SubtractionModule.java
+ * Author     : Roberto Requejo Fernandez
+ * Date       : October 31, 2023
+ * Description: This class is the subtraction module of the calculator. It connects
+ *              to the server and waits for messages from the server. When a
+ *              message is received, it performs the subtraction and sends the
+ *              result back to the server.
+
+ *******************************************************************************/
+
 public class SubtractionModule {
     private Socket socket;
 
@@ -33,7 +44,6 @@ public class SubtractionModule {
 
                 out.writeUTF("cell");
 
-                // Create a thread to listen for server messages
                 Thread messageListener = new Thread(new MessageListener());
                 messageListener.start();
                 maxAttempts = 0;
@@ -56,27 +66,28 @@ public class SubtractionModule {
 
     private static int selectRandomPort(int lowerBound, int upperBound)
     {
-        // Creating a Random object
         Random random = new Random();
         return random.nextInt(upperBound - lowerBound + 1) + lowerBound;
     }
 
-    private class MessageListener implements Runnable {
+    private class MessageListener implements Runnable
+    {
         @Override
-        public void run() {
-
-            while (socket.isConnected()) {
-                try {
+        public void run()
+        {
+            while (socket.isConnected())
+            {
+                try
+                {
                     Mensaje incoming = DecoderEncoder.leer(in);
-                    //incomingMessage = in.readUTF();
                     String incomingMessage = new String(incoming.getDatos());
                     String[] messageParts = incomingMessage.split(",");
                     if (incoming.getTipoOperacion() == (short) 2)
                     {
-                        System.out.println("Addition module received package");
-                        int result = Integer.parseInt(messageParts[0]) + Integer.parseInt(messageParts[1]);
+                        System.out.println("Subtraction module received package");
+                        int result = Integer.parseInt(messageParts[0]) - Integer.parseInt(messageParts[1]);
 
-                        String resultMessage = messageParts[0] + " + " + messageParts[1] + " = " + result;
+                        String resultMessage = messageParts[0] + " - " + messageParts[1] + " = " + result;
                         Mensaje outgoing = new Mensaje();
                         outgoing.setTipoOperacion((short) 5);
                         outgoing.setDatos(resultMessage.getBytes());
@@ -92,9 +103,6 @@ public class SubtractionModule {
         }
     }
 
-    // main
-    public static void main(String[] args) {
-        new SubtractionModule("localhost");
-    }
+    public static void main(String[] args) { new SubtractionModule("localhost"); }
 
 }

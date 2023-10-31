@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e2cbbcd-7694-4785-9420-4d67f77969bd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/clientcalculator/DecoderEncoder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/clientcalculator/Mensaje.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Server-Cells/src/DecoderEncoder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Server-Cells/src/Mensaje.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clientcalculator/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clientcalculator/CalculatorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Final-Node-Calculator/src/DecoderEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Final-Node-Calculator/src/DecoderEncoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Final-Node-Calculator/src/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Final-Node-Calculator/src/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server-Cells/src/AdditionModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server-Cells/src/AdditionModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server-Cells/src/DivisionModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server-Cells/src/DivisionModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server-Cells/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server-Cells/src/MultiplicationModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server-Cells/src/MultiplicationModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server-Cells/src/SubtractionModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server-Cells/src/SubtractionModule.java" afterDir="false" />
-    </list>
+    <list default="true" id="9e2cbbcd-7694-4785-9420-4d67f77969bd" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,7 +78,7 @@
       <workItem from="1698724719198" duration="5000" />
       <workItem from="1698724782256" duration="227000" />
       <workItem from="1698725019062" duration="8000" />
-      <workItem from="1698725141354" duration="4591000" />
+      <workItem from="1698725141354" duration="4700000" />
     </task>
     <servers />
   </component>

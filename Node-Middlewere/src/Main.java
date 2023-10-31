@@ -1,11 +1,15 @@
-import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.net.ServerSocket;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.Objects;
-import java.util.ResourceBundle;
+
+/*******************************************************************************
+ *                             class Main
+ *******************************************************************************
+ * File       : Main.java
+ * Author     : Roberto Requejo Fernandez
+ * Date       : October 31, 2023
+ * Description: Main class of the project. It starts the node.
+
+ *******************************************************************************/
 
 public class Main
 {
@@ -15,7 +19,6 @@ public class Main
         int maxPort = 5010;
         int port = 5000;
 
-        // Buscamos un ouerto del rango que este disponible
         while(port <= maxPort)
         {
             try

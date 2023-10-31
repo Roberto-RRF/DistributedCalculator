@@ -1,11 +1,22 @@
 import java.io.*;
 import java.net.Socket;
-import java.util.Objects;
 import java.util.Random;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
-public class MultiplicationModule {
+/*******************************************************************************
+ *                             class MultiplicationModule
+ *******************************************************************************
+ * File       : MultiplicationModule.java
+ * Author     : Roberto Requejo Fernandez
+ * Date       : October 31, 2023
+ * Description: This class is the multiplication module of the calculator. It connects
+ *              to the server and waits for messages from the server. When a
+ *              message is received, it performs the multiplication and sends the
+ *              result back to the server.
+
+ *******************************************************************************/
+
+public class MultiplicationModule
+{
     private Socket socket;
 
     private DataInputStream  in;
@@ -33,7 +44,6 @@ public class MultiplicationModule {
 
                 out.writeUTF("cell");
 
-                // Create a thread to listen for server messages
                 Thread messageListener = new Thread(new MessageListener());
                 messageListener.start();
                 maxAttempts = 0;
@@ -61,12 +71,16 @@ public class MultiplicationModule {
         return random.nextInt(upperBound - lowerBound + 1) + lowerBound;
     }
 
-    private class MessageListener implements Runnable {
+    private class MessageListener implements Runnable
+    {
         @Override
-        public void run() {
+        public void run()
+        {
 
-            while (socket.isConnected()) {
-                try {
+            while (socket.isConnected())
+            {
+                try
+                {
                     Mensaje incoming = DecoderEncoder.leer(in);
                     //incomingMessage = in.readUTF();
                     String incomingMessage = new String(incoming.getDatos());
@@ -83,7 +97,8 @@ public class MultiplicationModule {
 
                         DecoderEncoder.escribir(out, outgoing);
                     }
-                } catch (IOException e) {
+                } catch (IOException e)
+                {
                     System.out.println("Error receiving package from component");
                     e.printStackTrace();
                     break;
@@ -92,7 +107,6 @@ public class MultiplicationModule {
         }
     }
 
-    // main
     public static void main(String[] args) {
         new MultiplicationModule("localhost");
     }

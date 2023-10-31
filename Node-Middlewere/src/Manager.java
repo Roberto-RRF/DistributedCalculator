@@ -3,6 +3,19 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/*******************************************************************************
+ *                             class Manager
+ *******************************************************************************
+ * File       : Manager.java
+ * Author     : Roberto Requejo Fernandez
+ * Date       : October 31, 2023
+ * Description: The definition of the manager. It contains necessary methods to
+ *              manage the connections between nodes and cells. Here is where we
+ *              listen for incoming messages and broadcast them to the other
+ *              components.
+
+ *******************************************************************************/
+
 
 public class Manager implements Runnable
 {
@@ -43,7 +56,6 @@ public class Manager implements Runnable
     @Override
     public void run()
     {
-        String incomingMessage;
         while (socket.isConnected())
         {
             try
@@ -52,11 +64,9 @@ public class Manager implements Runnable
 
                 if (Objects.equals(type, "node"))
                 {
-                    System.out.println("Broadcast to cells");
                     broadcastPackageToCells(mensaje);
                 } else
                 {
-                    System.out.println("General Broadcast");
                     broadcastPackage(mensaje);
                 }
             } catch (IOException e)
@@ -70,36 +80,34 @@ public class Manager implements Runnable
 
     public void broadcastPackage(Mensaje data)
     {
-        for (Manager componentAdmin : managerList) {
-            try {
-                // Que no se lo mande a el mismo y que no sea null
-                if (!componentAdmin.socket.equals(this.socket)) {
-                    DecoderEncoder.escribir(componentAdmin.out, data);
+        for (Manager component : managerList)
+        {
+            try
+            {
+                if (!component.socket.equals(this.socket))
+                {
+                    DecoderEncoder.escribir(component.out, data);
                 }
-
-            } catch (IOException e) {
+            } catch (IOException e)
+            {
                 e.printStackTrace();
             }
         }
-
-
     }
 
     public void broadcastPackageToCells(Mensaje data)
     {
-        System.out.println("Broadcasting package: " + data);
-        for (Manager componentAdmin : managerList)
+        for (Manager component : managerList)
         {
             try
             {
-                if (!componentAdmin.socket.equals(this.socket) && Objects.equals(componentAdmin.type, "cell"))
+                if (!component.socket.equals(this.socket) && Objects.equals(component.type, "cell"))
                 {
-                    DecoderEncoder.escribir(componentAdmin.out, data);
-//                    out.writeUTF(data);
+                    DecoderEncoder.escribir(component.out, data);
                 }
             } catch (IOException e)
             {
-                System.out.println("Error sending package to cell");
+                System.out.println("Error while broadcasting package to cells");
                 e.printStackTrace();
             }
         }

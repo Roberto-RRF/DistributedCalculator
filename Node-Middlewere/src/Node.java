@@ -2,6 +2,17 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/*******************************************************************************
+ *                             class Node
+ *******************************************************************************
+ * File       : Node.java
+ * Author     : Roberto Requejo Fernandez
+ * Date       : October 31, 2023
+ * Description: The definition of the node. It contains necessary methods to
+ *              start the node and search for other nodes. Also create new
+ *              threads for each new connection.
+
+ *******************************************************************************/
 public class Node
 {
 
@@ -14,7 +25,8 @@ public class Node
 
     public void startNode()
     {
-        new Thread(() -> {
+        new Thread(() ->
+        {
             try
             {
                 while (!nodeSocket.isClosed())
