@@ -5,35 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e2cbbcd-7694-4785-9420-4d67f77969bd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Final-Node-Calculator/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Final-Node-Calculator/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Final-Node-Calculator/src/DecoderEncoder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Final-Node-Calculator/src/Mensaje.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Server-Cells/src/DivisionModule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Server-Cells/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Server-Cells/src/MultiplicationModule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Server-Cells/src/SubtractionModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/newclientcalculator/CalculatorApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/newclientcalculator/CalculatorController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/newclientcalculator/CalculatorView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Final-Node-Calculator/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Final-Node-Calculator/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Final-Node-Calculator/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Final-Node-Calculator/src/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/clientcalculator/DecoderEncoder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/clientcalculator/Mensaje.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Server-Cells/src/DecoderEncoder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Server-Cells/src/Mensaje.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clientcalculator/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clientcalculator/CalculatorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Final-Node-Calculator/src/DecoderEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Final-Node-Calculator/src/DecoderEncoder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Final-Node-Calculator/src/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Final-Node-Calculator/src/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Final-Node-Calculator/src/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Final-Node-Calculator/src/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server-Add-Module/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server-Add-Module/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server-Add-Module/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server-Add-Module/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server-Add-Module/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server-Add-Module/Server-Add-Module.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server-Add-Module/src/AdditionModule.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server-Cells/src/AdditionModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server-Cells/src/AdditionModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server-Cells/src/DivisionModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server-Cells/src/DivisionModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server-Cells/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server-Cells/src/MultiplicationModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server-Cells/src/MultiplicationModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server-Cells/src/SubtractionModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server-Cells/src/SubtractionModule.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,15 +43,44 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.clientcalculator" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="CalculatorApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.clientcalculator.CalculatorApplication" />
+      <module name="Client-Calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.clientcalculator.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.CalculatorApplication" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -79,6 +92,7 @@
       <workItem from="1698724719198" duration="5000" />
       <workItem from="1698724782256" duration="227000" />
       <workItem from="1698725019062" duration="8000" />
+      <workItem from="1698725141354" duration="4591000" />
     </task>
     <servers />
   </component>

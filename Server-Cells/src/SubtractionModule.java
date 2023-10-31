@@ -65,20 +65,23 @@ public class SubtractionModule {
         @Override
         public void run() {
 
-            String incomingMessage;
             while (socket.isConnected()) {
                 try {
-                    incomingMessage = in.readUTF();
-
+                    Mensaje incoming = DecoderEncoder.leer(in);
+                    //incomingMessage = in.readUTF();
+                    String incomingMessage = new String(incoming.getDatos());
                     String[] messageParts = incomingMessage.split(",");
-                    if (Objects.equals(messageParts[0], "100") && Objects.equals(messageParts[3],"-"))
+                    if (incoming.getTipoOperacion() == (short) 2)
                     {
-                        System.out.println("Subtraction module received package");
-                        int result = Integer.parseInt(messageParts[1]) - Integer.parseInt(messageParts[2]);
-                        String resultString = "200,"+messageParts[1]+","+messageParts[2]+","+messageParts[3]+","+result;
+                        System.out.println("Addition module received package");
+                        int result = Integer.parseInt(messageParts[0]) + Integer.parseInt(messageParts[1]);
 
-                        out.writeUTF(resultString);
-                        out.flush();
+                        String resultMessage = messageParts[0] + " + " + messageParts[1] + " = " + result;
+                        Mensaje outgoing = new Mensaje();
+                        outgoing.setTipoOperacion((short) 5);
+                        outgoing.setDatos(resultMessage.getBytes());
+
+                        DecoderEncoder.escribir(out, outgoing);
                     }
                 } catch (IOException e) {
                     System.out.println("Error receiving package from component");
@@ -87,6 +90,11 @@ public class SubtractionModule {
                 }
             }
         }
+    }
+
+    // main
+    public static void main(String[] args) {
+        new SubtractionModule("localhost");
     }
 
 }

@@ -15,8 +15,6 @@ public class Manager implements Runnable
 
     private DataOutputStream out;
 
-    private String element;
-
     private String type;
 
 
@@ -50,17 +48,16 @@ public class Manager implements Runnable
         {
             try
             {
-                incomingMessage = in.readUTF();
-                System.out.println("Incoming message: " + incomingMessage);
+                Mensaje mensaje = DecoderEncoder.leer(in);
 
                 if (Objects.equals(type, "node"))
                 {
                     System.out.println("Broadcast to cells");
-                    broadcastPackageToCells(incomingMessage);
+                    broadcastPackageToCells(mensaje);
                 } else
                 {
                     System.out.println("General Broadcast");
-                    broadcastPackage(incomingMessage);
+                    broadcastPackage(mensaje);
                 }
             } catch (IOException e)
             {
@@ -71,37 +68,38 @@ public class Manager implements Runnable
         }
     }
 
-    public void broadcastPackage(String data)
+    public void broadcastPackage(Mensaje data)
     {
-        System.out.println("Broadcasting package: " + data);
-        for (Manager componentAdmin : managerList)
-        {
-            try
-            {
-                if (!Objects.equals(componentAdmin.element, element))
-                {
-                    out.writeUTF(data);
+        for (Manager componentAdmin : managerList) {
+            try {
+                // Que no se lo mande a el mismo y que no sea null
+                if (!componentAdmin.socket.equals(this.socket)) {
+                    DecoderEncoder.escribir(componentAdmin.out, data);
                 }
-            } catch (IOException e)
-            {
+
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+
+
     }
 
-    public void broadcastPackageToCells(String data)
+    public void broadcastPackageToCells(Mensaje data)
     {
         System.out.println("Broadcasting package: " + data);
         for (Manager componentAdmin : managerList)
         {
             try
             {
-                if (!componentAdmin.element.equals(element) && Objects.equals(componentAdmin.type, "cell"))
+                if (!componentAdmin.socket.equals(this.socket) && Objects.equals(componentAdmin.type, "cell"))
                 {
-                    out.writeUTF(data);
+                    DecoderEncoder.escribir(componentAdmin.out, data);
+//                    out.writeUTF(data);
                 }
             } catch (IOException e)
             {
+                System.out.println("Error sending package to cell");
                 e.printStackTrace();
             }
         }

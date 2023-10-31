@@ -13,6 +13,7 @@ import java.io.*;
 import java.net.*;
 import java.net.Socket;
 import java.util.Objects;
+import java.util.Random;
 
 public class CalculatorController {
     @FXML
@@ -35,6 +36,9 @@ public class CalculatorController {
 
     private DataOutputStream out;
 
+    int maxPort = 5010;
+    int minPort = 5000;
+    int maxAttempts = maxPort - minPort;
 
 
 
@@ -66,22 +70,35 @@ public class CalculatorController {
     }
 
     @FXML
-    private void equalButtonClickHandler(ActionEvent event){
+    private void equalButtonClickHandler(ActionEvent event) throws IOException {
+        Mensaje mensaje = new Mensaje();
+        if(Objects.equals(operator, "+"))
+        {
+            mensaje.setTipoOperacion((short) 1);
+        }
+        else if(Objects.equals(operator, "-"))
+        {
+            mensaje.setTipoOperacion((short) 2);
+        }
+        else if(Objects.equals(operator, "*"))
+        {
+            mensaje.setTipoOperacion((short) 3);
+        }
+        else if(Objects.equals(operator, "/"))
+        {
+            mensaje.setTipoOperacion((short) 4);
+        }
 
+        packageToSend = firstNumber+","+secondNumber;
 
-        packageToSend = "100,"+firstNumber+","+secondNumber+","+operator;
+        mensaje.setDatos(packageToSend.getBytes());
+
+        DecoderEncoder.escribir(out, mensaje);
 
         firstNumber = "";
         secondNumber = "";
         operator = "";
         calculatorDisplay.setText("");
-
-        try {
-            out.writeUTF(packageToSend);
-            out.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
@@ -92,6 +109,13 @@ public class CalculatorController {
         calculatorDisplay.setText("");
     }
 
+    private static int selectRandomPort(int lowerBound, int upperBound)
+    {
+        // Creating a Random object
+        Random random = new Random();
+        return random.nextInt(upperBound - lowerBound + 1) + lowerBound;
+    }
+
 
     public void initialize()
     {
@@ -100,23 +124,43 @@ public class CalculatorController {
         Thread socketThread = new Thread(() -> {
             try {
 
-                socket = new Socket("localhost", 5000);
-                in = new DataInputStream(socket.getInputStream());
-                out = new DataOutputStream(new DataOutputStream(socket.getOutputStream()));
+                while(maxAttempts > 0)
+                {
+                    try
+                    {
+                        socket = new Socket("localhost", selectRandomPort(minPort, maxPort));
+                        System.out.println("Connected to server on port: "+socket.getPort());
+                        in = new DataInputStream(socket.getInputStream());
+                        out = new DataOutputStream(new DataOutputStream(socket.getOutputStream()));
 
-                out.writeUTF("cell");
-                out.flush();
+                        out.writeUTF("cell");
+                        out.flush();
+                        break;
+                    } catch (IOException e)
+                    {
+                        if(maxAttempts > 0)
+                        {
+                            maxAttempts--;
+                        } else
+                        {
+                            e.printStackTrace();
+                            System.out.println("No ports available");
+                            break;
+                        }
+                    }
+                }
+
+
 
 
 
                 while (true) {
+                    System.out.println("Waiting for message");
+                    Mensaje incoming = DecoderEncoder.leer(in);
 
-                    serverResponse = in.readUTF();
-                    System.out.println(serverResponse);
-                    String messageParts[] = serverResponse.split(",");
-                    if(Objects.equals(messageParts[0], "200"))
+                    if(incoming.getTipoOperacion() == (short)5)
                     {
-                        String result = messageParts[1]+" "+messageParts[3]+" "+messageParts[2]+" = "+messageParts[4];
+                        String result = new String(incoming.getDatos());
                         resultsHistory.add(result);
                         Platform.runLater(() -> {
                             Label resultLabel = new Label(result);
