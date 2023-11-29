@@ -33,8 +33,8 @@ public class CalculatorController {
 
     private Socket socket;
     private DataInputStream  in;
-
     private DataOutputStream out;
+    private SocketManager socketManager;
 
     int maxPort = 5010;
     int minPort = 5000;
@@ -93,7 +93,8 @@ public class CalculatorController {
 
         mensaje.setDatos(packageToSend.getBytes());
 
-        DecoderEncoder.escribir(out, mensaje);
+        socketManager.sendPackage(mensaje);
+
 
         firstNumber = "";
         secondNumber = "";
@@ -119,66 +120,16 @@ public class CalculatorController {
 
     public void initialize()
     {
-
-        // Start a new thread for socket communication.
-        Thread socketThread = new Thread(() -> {
-            try {
-
-                while(maxAttempts > 0)
-                {
-                    try
-                    {
-                        socket = new Socket("localhost", selectRandomPort(minPort, maxPort));
-                        System.out.println("Connected to server on port: "+socket.getPort());
-                        in = new DataInputStream(socket.getInputStream());
-                        out = new DataOutputStream(new DataOutputStream(socket.getOutputStream()));
-
-                        out.writeUTF("cell");
-                        out.flush();
-                        break;
-                    } catch (IOException e)
-                    {
-                        if(maxAttempts > 0)
-                        {
-                            maxAttempts--;
-                        } else
-                        {
-                            e.printStackTrace();
-                            System.out.println("No ports available");
-                            break;
-                        }
-                    }
-                }
-
-
-
-
-
-                while (true) {
-                    System.out.println("Waiting for message");
-                    Mensaje incoming = DecoderEncoder.leer(in);
-
-                    if(incoming.getTipoOperacion() == (short)5)
-                    {
-                        String result = new String(incoming.getDatos());
-                        resultsHistory.add(result);
-                        Platform.runLater(() -> {
-                            Label resultLabel = new Label(result);
-                            vbox.getChildren().add(resultLabel);
-                        });
-                    }
-                    System.out.println(serverResponse);
-
-
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-        socketThread.setDaemon(true);
-        socketThread.start();
+        socketManager = new SocketManager(this);
+        socketManager.startSocketThread();
     }
 
+    public void updateUIWithResult(String result) {
+        resultsHistory.add(result);
+        Platform.runLater(() -> {
+            Label resultLabel = new Label(result);
+            vbox.getChildren().add(resultLabel);
+        });
+    }
 
 }

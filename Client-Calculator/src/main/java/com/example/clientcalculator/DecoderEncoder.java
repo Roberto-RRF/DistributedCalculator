@@ -34,6 +34,7 @@ public class DecoderEncoder {
 
         m.setDatos(datos);
         String mensaje2 = new String(m.getDatos());
+        System.out.println("LEER: datos: "+mensaje2);
 
 
 

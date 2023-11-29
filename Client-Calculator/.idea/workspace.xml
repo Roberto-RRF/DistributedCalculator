@@ -5,12 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e2cbbcd-7694-4785-9420-4d67f77969bd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/clientcalculator/QueueManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/clientcalculator/SocketManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clientcalculator/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clientcalculator/CalculatorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clientcalculator/DecoderEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clientcalculator/DecoderEncoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Node-Middlewere/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Node-Middlewere/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server-Cells/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Server-Cells/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server-Cells/src/AdditionModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server-Cells/src/AdditionModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server-Cells/src/DecoderEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server-Cells/src/DecoderEncoder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -82,10 +98,22 @@
       <workItem from="1698725019062" duration="8000" />
       <workItem from="1698725141354" duration="4700000" />
       <workItem from="1698770095930" duration="519000" />
+      <workItem from="1701275858314" duration="1272000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

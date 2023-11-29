@@ -81,8 +81,8 @@ public class AdditionModule
                 try
                 {
                     Mensaje incoming = DecoderEncoder.leer(in);
-                    //incomingMessage = in.readUTF();
                     String incomingMessage = new String(incoming.getDatos());
+                    System.out.println("Addition module received message: " + incomingMessage);
                     String[] messageParts = incomingMessage.split(",");
                     if (incoming.getTipoOperacion() == (short) 1)
                     {

@@ -17,16 +17,30 @@ public class DecoderEncoder
 {
     public static Mensaje leer(DataInputStream dis) throws IOException
     {
-        Short tipoOperacion = dis.readShort();
+// ciclo de lectura
 
-        Short tam = dis.readShort();
+        Short tipoOperacion = dis.readShort(); // se lee el tipo de operacion
+        System.out.println("tipo entrada: "+tipoOperacion);
 
-        byte[] datos = new byte[tam];
-        dis.readFully(datos);
+        Short tam = dis.readShort(); // se lee el tam del arreglo
+        System.out.println("tam entrada: "+tam);
+
+        byte[] datos = new byte[tam]; // Definir el arreglo de bytes
+        dis.readFully(datos); // leer el arreglo de datos
+        System.out.println("datos entrada: "+datos);
+
+        String mensaje = new String(datos); // se imprime en pantalla
+        System.out.println("datos entrada: "+ mensaje);
 
         Mensaje m = new Mensaje();
         m.setTipoOperacion(tipoOperacion);
+        System.out.println("tipo: "+m.getTipoOperacion());
+
         m.setDatos(datos);
+        String mensaje2 = new String(m.getDatos());
+        System.out.println("LEER: datos: "+mensaje2);
+
+
 
         return m;
     }
