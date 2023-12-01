@@ -1,6 +1,13 @@
+package main.java.com.mycompany.celula;
+
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.Socket;
+import java.net.URLClassLoader;
+import java.nio.file.Paths;
+import java.util.Properties;
 import java.util.Random;
+import java.net.URL;
 
 /*******************************************************************************
  *                             class AdditionModule
@@ -15,7 +22,7 @@ import java.util.Random;
 
  *******************************************************************************/
 
-public class AdditionModule
+public class ServerCell
 {
     private Socket socket;
 
@@ -25,11 +32,18 @@ public class AdditionModule
 
     public int maxPort = 5010;
     public int minPort = 5000;
-    public int maxAttempts = maxPort - minPort;
+    public int maxAttempts = (maxPort - minPort)*10;
+
+    private OperacionAritmetica operacionAritmetica;
 
 
-    public AdditionModule(String serverName)
-    {
+
+
+    public String cellId = "";
+    public Short cellType;
+
+
+    public ServerCell(String serverName) throws MalformedURLException {
 
         while(maxAttempts > 0)
         {
@@ -61,6 +75,32 @@ public class AdditionModule
                 }
             }
         }
+        cellId = socket.getLocalAddress().toString() + socket.getLocalPort() + System.currentTimeMillis();
+
+        Properties properties = new Properties();
+        try (FileInputStream input = new FileInputStream("cfg/config.properties"))
+        {
+            try
+            {
+                properties.load(input);
+            } catch (IOException ex)
+            {
+                ex.printStackTrace();
+            }
+            cellType = Short.parseShort(properties.getProperty("tipo_operacion"));
+            System.out.println("ID Celltype "+cellType);
+        } catch (IOException e)
+        {
+            // Manejar cualquier excepción de entrada/salida (IOException)
+            e.printStackTrace();
+        }
+
+
+        QueueManager.getInstance().getNextMessage(out);
+
+
+
+
 
     }
 
@@ -71,6 +111,8 @@ public class AdditionModule
         return random.nextInt(upperBound - lowerBound + 1) + lowerBound;
     }
 
+
+
     private class MessageListener implements Runnable
     {
         @Override
@@ -78,24 +120,24 @@ public class AdditionModule
         {
             while (socket.isConnected())
             {
+
                 try
                 {
-                    Mensaje incoming = DecoderEncoder.leer(in);
-                    String incomingMessage = new String(incoming.getDatos());
-                    System.out.println("Addition module received message: " + incomingMessage);
-                    String[] messageParts = incomingMessage.split(",");
-                    if (incoming.getTipoOperacion() == (short) 1)
+                    System.out.println("Waiting for message");
+                    Mensaje incoming;
+                    incoming = DecoderEncoder.leer(in);
+                    incoming.printVariables();
+                    if(incoming.getTipoOperacion() == (short) cellType)
                     {
-                        System.out.println("Addition module received package");
-                        int result = Integer.parseInt(messageParts[0]) + Integer.parseInt(messageParts[1]);
-
-                        String resultMessage = messageParts[0] + " + " + messageParts[1] + " = " + result;
-                        Mensaje outgoing = new Mensaje();
-                        outgoing.setTipoOperacion((short) 5);
-                        outgoing.setDatos(resultMessage.getBytes());
-
-                        DecoderEncoder.escribir(out, outgoing);
+                        QueueManager.getInstance().add(incoming);
                     }
+
+
+
+
+
+
+
                 } catch (IOException e)
                 {
                     System.out.println("Error receiving package from component");
@@ -105,5 +147,6 @@ public class AdditionModule
             }
         }
     }
-    public static void main(String[] args){ new AdditionModule("localhost"); }
+
+    public static void main(String[] args) throws MalformedURLException { new ServerCell("localhost"); }
 }

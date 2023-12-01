@@ -13,30 +13,70 @@ import java.io.IOException;
 
  *******************************************************************************/
 
-public class DecoderEncoder
-{
+public class DecoderEncoder {
+
+
+
     public static Mensaje leer(DataInputStream dis) throws IOException
     {
+        Mensaje m = new Mensaje();
+
+        // Leer tipo de operacion
         Short tipoOperacion = dis.readShort();
+        m.setTipoOperacion(tipoOperacion);
 
+        // Leer Datos
         Short tam = dis.readShort();
-
         byte[] datos = new byte[tam];
         dis.readFully(datos);
-
-        Mensaje m = new Mensaje();
-        m.setTipoOperacion(tipoOperacion);
         m.setDatos(datos);
 
+        // Leer idOperacion
+        tam = dis.readShort();
+        byte[] idOperacion = new byte[tam];
+        dis.readFully(idOperacion);
+        m.setIdOperacion(idOperacion);
+
+        // Leer idCell
+        tam = dis.readShort();
+        byte[] idCell = new byte[tam];
+        dis.readFully(idCell);
+        m.setIdCell(idCell);
+
+        // Leer idNode
+        tam = dis.readShort();
+        byte[] idNode = new byte[tam];
+        dis.readFully(idNode);
+        m.setIdNode(idNode);
+        m.printVariables();
         return m;
     }
 
     public static void escribir(DataOutputStream dos, Mensaje mensaje) throws IOException
     {
-        Short tam = (short) mensaje.getDatos().length;
+        mensaje.printVariables();
+        // Enviar tipo de operacion
+        Short tam = mensaje.getTipoOperacion() == null ? 0 : mensaje.getTipoOperacion();
+        dos.writeShort(tam);
 
-        dos.writeShort(mensaje.getTipoOperacion());
+        // Enviar Datos
+        tam = mensaje.getDatos() == null ? 0 : (short) mensaje.getDatos().length;
         dos.writeShort(tam);
         dos.write(mensaje.getDatos());
+
+        // Enviar idOperacion
+        tam = mensaje.getIdOperacion() == null ? 0 : (short) mensaje.getIdOperacion().length;
+        dos.writeShort(tam);
+        dos.write(mensaje.getIdOperacion() != null ? mensaje.getIdOperacion() : new byte[0]);
+
+        // Enviar idCell
+        tam = mensaje.getIdCell() == null ? 0 : (short) mensaje.getIdCell().length;
+        dos.writeShort(tam);
+        dos.write(mensaje.getIdCell() != null ? mensaje.getIdCell() : new byte[0]);
+
+        // Enviar idNode
+        tam = mensaje.getIdNode() == null ? 0 : (short) mensaje.getIdNode().length;
+        dos.writeShort(tam);
+        dos.write(mensaje.getIdNode() != null ? mensaje.getIdNode() : new byte[0]);
     }
 }

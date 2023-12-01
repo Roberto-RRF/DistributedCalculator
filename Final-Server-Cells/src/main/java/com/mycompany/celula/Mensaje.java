@@ -1,4 +1,4 @@
-package com.example.clientcalculator;
+package main.java.com.mycompany.celula;
 
 public class Mensaje
 {

@@ -1,4 +1,4 @@
-package com.example.clientcalculator;
+package main.java.com.mycompany.celula;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -44,7 +44,6 @@ public class DecoderEncoder {
         dis.readFully(idNode);
         m.setIdNode(idNode);
 
-        m.printVariables();
         return m;
     }
 
@@ -54,6 +53,7 @@ public class DecoderEncoder {
         // Enviar tipo de operacion
         Short tam = mensaje.getTipoOperacion() == null ? 0 : mensaje.getTipoOperacion();
         dos.writeShort(tam);
+        System.out.println("tam: " + tam);
 
         // Enviar Datos
         tam = mensaje.getDatos() == null ? 0 : (short) mensaje.getDatos().length;

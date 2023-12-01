@@ -31,6 +31,8 @@ public class CalculatorController {
     String  packageToSend = "";
 
 
+
+
     private Socket socket;
     private DataInputStream  in;
     private DataOutputStream out;
@@ -38,7 +40,7 @@ public class CalculatorController {
 
     int maxPort = 5010;
     int minPort = 5000;
-    int maxAttempts = maxPort - minPort;
+    int maxAttempts = (maxPort - minPort)*10;
 
 
 
@@ -72,8 +74,7 @@ public class CalculatorController {
     @FXML
     private void equalButtonClickHandler(ActionEvent event) throws IOException {
         Mensaje mensaje = new Mensaje();
-        if(Objects.equals(operator, "+"))
-        {
+        if(Objects.equals(operator, "+")) {
             mensaje.setTipoOperacion((short) 1);
         }
         else if(Objects.equals(operator, "-"))
@@ -93,6 +94,13 @@ public class CalculatorController {
 
         mensaje.setDatos(packageToSend.getBytes());
 
+        // Generamos un hash para identificar la operacion
+        String idOperacion = System.currentTimeMillis() + firstNumber + secondNumber;
+        mensaje.setIdOperacion(idOperacion.getBytes());
+        mensaje.setIdCell(socketManager.clientId.getBytes());
+        mensaje.setIdNode("Vacio".getBytes());
+
+        QueueManager.getInstance().putMessage(mensaje);
         socketManager.sendPackage(mensaje);
 
 
@@ -120,6 +128,8 @@ public class CalculatorController {
 
     public void initialize()
     {
+
+
         socketManager = new SocketManager(this);
         socketManager.startSocketThread();
     }
